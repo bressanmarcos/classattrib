@@ -26,6 +26,20 @@ def test_class_attribute_patch_and_rollback(dynamic_class):
     assert dynamic_class.local == None
 
 
+def test_class_attribute_nested_patching(dynamic_class):
+    assert dynamic_class.local == None
+
+    with SetClassAttribute(dynamic_class, local=42):
+        assert dynamic_class.local == 42
+
+        with SetClassAttribute(dynamic_class, local=99):
+            assert dynamic_class.local == 99
+
+        assert dynamic_class.local == 42
+
+    assert dynamic_class.local == None
+
+
 def test_no_support_for_class_that_already_has_a_metaclass():
     class Meta(type):
         ...
