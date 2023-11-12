@@ -11,7 +11,18 @@ def dynamic_class():
         dynamic = DynamicAttribute(None)
         dynamic_no_default = DynamicAttribute()
 
+        def method(self):
+            return 42
+
     return MyDynamicClass
+
+
+def test_wrapper_class_still_behaves_like_the_original(dynamic_class):
+    assert dynamic_class.__name__ == "MyDynamicClass"
+    assert "MyDynamicClass" in dynamic_class.__qualname__
+    
+    obj = dynamic_class()
+    assert obj.method() == 42
 
 
 def test_static_attribute_still_works_as_usual(dynamic_class):

@@ -11,7 +11,7 @@ def DynamicClass(cls):
     class NewClass(metaclass=DynamicClassMeta):
         ...
 
-    attributes_to_skip = ["__dict__", "__weakref__"]
+    attributes_to_skip = ("__dict__", "__weakref__")
 
     for attribute, value in vars(cls).items():
         if attribute in attributes_to_skip:
@@ -20,5 +20,11 @@ def DynamicClass(cls):
             setattr(DynamicClassMeta, attribute, value)
         else:
             setattr(NewClass, attribute, value)
+
+    attributes_to_include = ("__name__", "__qualname__")
+
+    for attribute in attributes_to_include:
+        value = getattr(cls, attribute)
+        setattr(NewClass, attribute, value)
 
     return NewClass
