@@ -1,6 +1,6 @@
 import threading
 
-from classattrib import SetClassAttribute, DynamicAttribute, DynamicClass
+from classattrib import DynamicAttribute, DynamicClass, SetClassAttribute
 
 
 def test_saved_value_for_class_attribute_is_garbage_collected_with_class(dynamic_class):
@@ -62,3 +62,16 @@ def test_dynamic_attribute_values_are_not_shared_among_threads(dynamic_class):
         assert dynamic_class.dynamic == 42
 
     assert dynamic_class.dynamic is None
+
+
+@DynamicClass
+class PickableClass:
+    attribute = DynamicAttribute()
+
+
+def test_class_pickling():
+    import pickle
+
+    serial = pickle.dumps(PickableClass)
+    deserial = pickle.loads(serial)
+    deserial is PickableClass
