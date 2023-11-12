@@ -19,7 +19,7 @@ def test_access_default_value(dynamic_class):
     assert dynamic_class.dynamic is None
 
 
-def test_access_default_afctory_value(dynamic_class):
+def test_access_default_factory_value(dynamic_class):
     assert dynamic_class.dynamic_factory == []
 
 

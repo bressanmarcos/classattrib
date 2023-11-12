@@ -1,6 +1,6 @@
 import pytest
 
-from classattrib import DynamicClass, SetClassAttribute
+from classattrib import DynamicAttribute, DynamicClass, SetClassAttribute
 
 
 def test_no_support_for_class_that_already_has_a_metaclass():
@@ -29,3 +29,9 @@ def test_set_attribute_that_is_not_dynamic():
 
     with pytest.raises(AttributeError):
         SetClassAttribute(Class, new_attribute=42)
+
+
+def test_dynamic_attribute_setting_default_and_default_factory():
+    with pytest.raises(ValueError):    
+        DynamicAttribute(default=None, default_factory=list)
+ 
