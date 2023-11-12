@@ -1,6 +1,6 @@
 import pytest
 
-from classattrib import DynamicAttribute, DynamicClass
+from dynattrib import DynamicAttribute, DynamicClass
 
 
 @pytest.fixture

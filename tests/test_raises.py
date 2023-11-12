@@ -1,6 +1,6 @@
 import pytest
 
-from classattrib import DynamicAttribute, DynamicClass, SetClassAttribute
+from dynattrib import DynamicAttribute, DynamicClass, SetClassAttribute
 
 
 def test_no_support_for_class_that_already_has_a_metaclass():

@@ -1,6 +1,6 @@
 import pytest
 
-from classattrib import SetClassAttribute
+from dynattrib import SetClassAttribute
 
 
 def test_wrapper_class_still_behaves_like_the_original(dynamic_class):
