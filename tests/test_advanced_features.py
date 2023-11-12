@@ -1,6 +1,6 @@
 import threading
 
-from classattrib import SetClassAttribute
+from classattrib import SetClassAttribute, DynamicAttribute, DynamicClass
 
 
 def test_saved_value_for_class_attribute_is_garbage_collected_with_class(dynamic_class):

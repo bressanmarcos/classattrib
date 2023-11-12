@@ -14,5 +14,8 @@ def dynamic_class():
 
         def method(self):
             return 42
+        
+        def __call__(self):
+            return 99
 
     return MyDynamicClass
