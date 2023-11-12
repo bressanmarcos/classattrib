@@ -19,6 +19,10 @@ def test_access_default_value(dynamic_class):
     assert dynamic_class.dynamic is None
 
 
+def test_access_default_afctory_value(dynamic_class):
+    assert dynamic_class.dynamic_factory == []
+
+
 def test_access_no_default_value(dynamic_class):
     with pytest.raises(AttributeError):
         dynamic_class.dynamic_no_default

@@ -10,6 +10,7 @@ def dynamic_class():
         static = "shared"
         dynamic = DynamicAttribute(None)
         dynamic_no_default = DynamicAttribute()
+        dynamic_factory = DynamicAttribute(default_factory=list)
 
         def method(self):
             return 42

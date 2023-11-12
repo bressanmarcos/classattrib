@@ -5,10 +5,13 @@ _NoDefault = object()
 
 
 class DynamicAttribute(threading.local):
-    __slots__ = "default"
+    __slots__ = "default", "default_factory"
 
-    def __init__(self, default=_NoDefault):
+    def __init__(self, default=_NoDefault, default_factory=None):
         self.default = default
+        self.default_factory = default_factory
+        if self.default is not _NoDefault and default_factory is not None:
+            raise ValueError("Must set only one from `default` and `default_factory`")
         self.values = weakref.WeakKeyDictionary()
 
     def __set__(self, cls, value):
@@ -25,6 +28,8 @@ class DynamicAttribute(threading.local):
 
         if self.default is not _NoDefault:
             return self.default
+        if self.default_factory is not None:
+            return self.default_factory()
 
         raise AttributeError("Attribute value is not set")
 
