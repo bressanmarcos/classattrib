@@ -1,9 +1,12 @@
+import threading
 import weakref
 
 _NoDefault = object()
 
 
-class DynamicAttribute:
+class DynamicAttribute(threading.local):
+    __slots__ = "default"
+
     def __init__(self, default=_NoDefault):
         self.default = default
         self.values = weakref.WeakKeyDictionary()

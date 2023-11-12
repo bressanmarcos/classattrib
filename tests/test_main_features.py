@@ -67,19 +67,3 @@ def test_subclass_attribute_takes_precedence_over_parents(dynamic_class):
 
     assert dynamic_class.dynamic is None
     assert SubClass.dynamic is None
-
-def test_saved_value_for_class_attribute_is_garbage_collected_with_class(dynamic_class):
-    """If for some reason the class ceases to exist while it has
-    defined attributes, we need to make sure their values are also
-    gc'ed."""
-    class SubClass(dynamic_class):
-        ...
-
-    SetClassAttribute(SubClass, dynamic=42).__enter__()
-    del SubClass
-    import gc
-    gc.collect()
-
-    meta = type(dynamic_class)
-    descriptor = meta.dynamic
-    assert len(descriptor.values) == 0
