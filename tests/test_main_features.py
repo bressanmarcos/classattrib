@@ -1,26 +1,12 @@
 import pytest
 
-from classattrib import DynamicAttribute, DynamicClass, SetClassAttribute
-
-
-@pytest.fixture
-def dynamic_class():
-    @DynamicClass
-    class MyDynamicClass:
-        static = "shared"
-        dynamic = DynamicAttribute(None)
-        dynamic_no_default = DynamicAttribute()
-
-        def method(self):
-            return 42
-
-    return MyDynamicClass
+from classattrib import SetClassAttribute
 
 
 def test_wrapper_class_still_behaves_like_the_original(dynamic_class):
     assert dynamic_class.__name__ == "MyDynamicClass"
     assert "MyDynamicClass" in dynamic_class.__qualname__
-    
+
     obj = dynamic_class()
     assert obj.method() == 42
 
